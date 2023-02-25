@@ -144,8 +144,9 @@ io.on("connection", (socket) => {
     if (!channelPresent) {
       channels.push({ channelId, createdBy: socket.id });
       createChannel(token, channelId);
+      console.log("channels", channels);
+      io.sockets.emit("new-channels", channels);
     }
-    io.emit("new-channels", channels);
   });
 
   socket.on("join-channel", ({ channelId, userName, token }) => {
